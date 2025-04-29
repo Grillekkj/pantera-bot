@@ -23,7 +23,6 @@ import {
 export class WhatsappClientService implements OnModuleInit {
   private readonly LOGGER: Logger = new Logger(WhatsappClientService.name);
   private readonly CLIENT: Client = new Client(WHATSAPP_CLIENT_OPTIONS);
-  private isInitialized = false;
 
   constructor(
     @InjectRepository(UsersEntity)
@@ -46,7 +45,6 @@ export class WhatsappClientService implements OnModuleInit {
     });
 
     this.CLIENT.on('ready', () => {
-      this.isInitialized = true;
       this.LOGGER.log('WhatsApp conectado com sucesso!');
     });
 
@@ -96,11 +94,6 @@ export class WhatsappClientService implements OnModuleInit {
   }
 
   public getClient(): Client {
-    if (!this.isInitialized) {
-      this.LOGGER.warn(
-        'Cliente WhatsApp ainda não está totalmente inicializado',
-      );
-    }
     return this.CLIENT;
   }
 }
