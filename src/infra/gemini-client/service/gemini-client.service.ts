@@ -10,6 +10,21 @@ export class GeminiClientService {
     apiKey: environment.gemini.API_KEY,
   });
 
+  private async fetchResponse(model: string, config: any, contents: any[]) {
+    const response = await this.ai.models.generateContent({
+      model,
+      config,
+      contents,
+    });
+
+    this.LOGGER.log(
+      'Resposta do Gemini:',
+      response.candidates?.[0]?.content?.parts?.[0]?.text,
+    );
+
+    return response.candidates?.[0]?.content?.parts?.[0]?.text;
+  }
+
   public async generateContent(inputText: string, systemInstruction?: string) {
     const config = {
       ...GEMINI_CLIENT_OPTIONS,
@@ -35,35 +50,32 @@ export class GeminiClientService {
     ];
 
     try {
-      const response = await this.ai.models.generateContent({
-        model: environment.gemini.MODEL_NAME,
+      const response = await this.fetchResponse(
+        environment.gemini.MODEL_NAME,
         config,
         contents,
-      });
-      this.LOGGER.log(
-        'Resposta do Gemini:',
-        response.candidates?.[0]?.content?.parts?.[0]?.text,
       );
-      return response.candidates?.[0]?.content?.parts?.[0]?.text;
+
+      return response;
     } catch (error) {
       this.LOGGER.error(
         'Erro gerando conteúdo, tentando com outro modelo...',
         error,
       );
+      // Retry with a different model if the first attempt fails
       try {
-        const response = await this.ai.models.generateContent({
-          model: environment.gemini.MODEL_NAME2,
+        const response = await this.fetchResponse(
+          environment.gemini.MODEL_NAME2,
           config,
           contents,
-        });
-        this.LOGGER.log(
-          'Resposta do Gemini:',
-          response.candidates?.[0]?.content?.parts?.[0]?.text,
         );
-        return response.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        return response;
       } catch (error) {
-        this.LOGGER.error('Erro gerando conteúdo', error);
-        throw error;
+        this.LOGGER.error(
+          'Erro gerando conteúdo, tentando com outro modelo...',
+          error,
+        );
       }
     }
   }
