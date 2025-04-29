@@ -5,6 +5,7 @@ import { WHATSAPP_CLIENT_OPTIONS } from '../../../configs/whatsapp-client.config
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsersEntity } from '../entity/whatsapp-client-users.entity';
+import { IRegisterUser, IWhatsappClientUser } from './whatsapp-client.struct';
 
 @Injectable()
 export class WhatsappClientService implements OnModuleInit {
@@ -38,6 +39,18 @@ export class WhatsappClientService implements OnModuleInit {
     });
 
     await this.CLIENT.initialize();
+  }
+
+  public async registerUser(data: IRegisterUser): Promise<IWhatsappClientUser> {
+    const user = await this.usersEntity.findOne({
+      where: { id: data.id },
+    });
+
+    if (user) throw new Error('Usuário já registrado.');
+
+    const newUser = this.usersEntity.create(data);
+
+    return await this.usersEntity.save(newUser);
   }
 
   public getClient(): Client {
