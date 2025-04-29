@@ -26,7 +26,7 @@ export class WhatsappClientService implements OnModuleInit {
 
   constructor(
     @InjectRepository(UsersEntity)
-    private readonly usersEntity: Repository<UsersEntity>,
+    private readonly usersRepository: Repository<UsersEntity>,
   ) {}
 
   async onModuleInit() {
@@ -52,19 +52,19 @@ export class WhatsappClientService implements OnModuleInit {
   }
 
   public async registerUser(data: IRegisterUser): Promise<IWhatsappClientUser> {
-    const user = await this.usersEntity.findOne({
+    const user = await this.usersRepository.findOne({
       where: { id: data.id },
     });
 
     if (user) throw new ConflictException('Usuário já registrado.');
 
-    const newUser = this.usersEntity.create(data);
+    const newUser = this.usersRepository.create(data);
 
-    return await this.usersEntity.save(newUser);
+    return await this.usersRepository.save(newUser);
   }
 
   public async getUser(data: IGetUser): Promise<IWhatsappClientUser | null> {
-    const user = await this.usersEntity.findOne({
+    const user = await this.usersRepository.findOne({
       where: { id: data.id },
     });
 
@@ -74,23 +74,23 @@ export class WhatsappClientService implements OnModuleInit {
   }
 
   public async updateUser(data: IUpdateUser): Promise<IWhatsappClientUser> {
-    const user = await this.usersEntity.findOne({
+    const user = await this.usersRepository.findOne({
       where: { id: data.id },
     });
 
     if (!user) throw new NotFoundException('Usuário não encontrado.');
 
-    return this.usersEntity.save(Object.assign(user, data));
+    return this.usersRepository.save(Object.assign(user, data));
   }
 
   public async deleteUser(data: IDeleteUser): Promise<void> {
-    const user = await this.usersEntity.findOne({
+    const user = await this.usersRepository.findOne({
       where: { id: data.id },
     });
 
     if (!user) throw new NotFoundException('Usuário não encontrado.');
 
-    await this.usersEntity.delete({ id: data.id });
+    await this.usersRepository.delete({ id: data.id });
   }
 
   public getClient(): Client {
