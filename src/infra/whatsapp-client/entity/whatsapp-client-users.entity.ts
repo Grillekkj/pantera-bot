@@ -7,7 +7,7 @@ export class UsersEntity {
   id: string;
 
   @Column({ type: 'enum', enum: WhatsappClientUsersMenu })
-  menu: string;
+  menu: WhatsappClientUsersMenu;
 
   @Column({ nullable: true })
   step: number;
