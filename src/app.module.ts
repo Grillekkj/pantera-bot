@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import typeorm from './configs/typeorm';
 import { environment } from './configs/environment';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { WhatsappClientModule } from './infra/whatsapp-client/whatsapp-client.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       logging: ['error', 'warn', 'schema', 'info', 'log'],
     }),
     ConfigModule.forRoot({ isGlobal: true, load: [typeorm] }),
+    WhatsappClientModule,
   ],
   providers: [AppService],
 })
