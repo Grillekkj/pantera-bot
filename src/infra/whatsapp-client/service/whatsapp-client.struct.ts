@@ -7,7 +7,6 @@ export interface IWhatsappClientUser {
 export interface IRegisterUser {
   id: string;
   menu: string;
-  step?: number;
 }
 
 export interface IUpdateUser {
