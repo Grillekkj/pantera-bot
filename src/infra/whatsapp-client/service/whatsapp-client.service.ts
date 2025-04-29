@@ -11,6 +11,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsersEntity } from '../entity/whatsapp-client-users.entity';
 import {
+  IDeleteUser,
   IGetUser,
   IRegisterUser,
   IUpdateUser,
@@ -81,6 +82,16 @@ export class WhatsappClientService implements OnModuleInit {
     if (!user) throw new NotFoundException('Usuário não encontrado.');
 
     return this.usersEntity.save(Object.assign(user, data));
+  }
+
+  public async deleteUser(data: IDeleteUser): Promise<void> {
+    const user = await this.usersEntity.findOne({
+      where: { id: data.id },
+    });
+
+    if (!user) throw new NotFoundException('Usuário não encontrado.');
+
+    await this.usersEntity.delete({ id: data.id });
   }
 
   public getClient(): Client {
