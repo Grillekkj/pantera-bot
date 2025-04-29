@@ -1,4 +1,5 @@
 import {
+  ConflictException,
   Injectable,
   Logger,
   NotFoundException,
@@ -57,7 +58,7 @@ export class WhatsappClientService implements OnModuleInit {
       where: { id: data.id },
     });
 
-    if (user) throw new Error('Usuário já registrado.');
+    if (user) throw new ConflictException('Usuário já registrado.');
 
     const newUser = this.usersEntity.create(data);
 
