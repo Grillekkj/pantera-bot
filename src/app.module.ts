@@ -5,6 +5,7 @@ import typeorm from './configs/typeorm';
 import { environment } from './configs/environment';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { WhatsappClientModule } from './infra/whatsapp-client/whatsapp-client.module';
+import { GeminiClientModule } from './infra/gemini-client/gemini-client.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { WhatsappClientModule } from './infra/whatsapp-client/whatsapp-client.mo
     }),
     ConfigModule.forRoot({ isGlobal: true, load: [typeorm] }),
     WhatsappClientModule,
+    GeminiClientModule,
   ],
   providers: [AppService],
 })
