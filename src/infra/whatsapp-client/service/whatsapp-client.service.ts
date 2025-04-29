@@ -1,11 +1,20 @@
-import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import {
+  Injectable,
+  Logger,
+  NotFoundException,
+  OnModuleInit,
+} from '@nestjs/common';
 import { Client } from 'whatsapp-web.js';
 import * as qrcode from 'qrcode-terminal';
 import { WHATSAPP_CLIENT_OPTIONS } from '../../../configs/whatsapp-client.config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsersEntity } from '../entity/whatsapp-client-users.entity';
-import { IRegisterUser, IWhatsappClientUser } from './whatsapp-client.struct';
+import {
+  IGetUser,
+  IRegisterUser,
+  IWhatsappClientUser,
+} from './whatsapp-client.struct';
 
 @Injectable()
 export class WhatsappClientService implements OnModuleInit {
@@ -51,6 +60,16 @@ export class WhatsappClientService implements OnModuleInit {
     const newUser = this.usersEntity.create(data);
 
     return await this.usersEntity.save(newUser);
+  }
+
+  public async getUser(data: IGetUser): Promise<IWhatsappClientUser | null> {
+    const user = await this.usersEntity.findOne({
+      where: { id: data.id },
+    });
+
+    if (!user) throw new NotFoundException('Usuário não encontrado.');
+
+    return user;
   }
 
   public getClient(): Client {
