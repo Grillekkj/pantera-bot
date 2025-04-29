@@ -13,6 +13,7 @@ import { UsersEntity } from '../entity/whatsapp-client-users.entity';
 import {
   IGetUser,
   IRegisterUser,
+  IUpdateUser,
   IWhatsappClientUser,
 } from './whatsapp-client.struct';
 
@@ -70,6 +71,16 @@ export class WhatsappClientService implements OnModuleInit {
     if (!user) throw new NotFoundException('Usuário não encontrado.');
 
     return user;
+  }
+
+  public async updateUser(data: IUpdateUser): Promise<IWhatsappClientUser> {
+    const user = await this.usersEntity.findOne({
+      where: { id: data.id },
+    });
+
+    if (!user) throw new NotFoundException('Usuário não encontrado.');
+
+    return this.usersEntity.save(Object.assign(user, data));
   }
 
   public getClient(): Client {
