@@ -1,18 +1,21 @@
+import { WhatsappClientUsersMenu } from '../entity/whatsapp-client-users-menu.enum';
+
 export interface IWhatsappClientUser {
   id: string;
-  menu: string;
-  step: number | null;
+  menu: WhatsappClientUsersMenu;
+  step: number | undefined;
 }
 
 export interface IRegisterUser {
   id: string;
-  menu: string;
+  menu: WhatsappClientUsersMenu;
+  step: number | undefined;
 }
 
 export interface IUpdateUser {
   id: string;
-  menu?: string | null;
-  step?: number | null;
+  menu?: WhatsappClientUsersMenu;
+  step?: number | undefined;
 }
 
 export interface IDeleteUser {
