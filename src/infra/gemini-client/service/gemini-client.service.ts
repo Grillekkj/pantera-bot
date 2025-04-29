@@ -76,6 +76,9 @@ export class GeminiClientService {
           'Erro gerando conteúdo, tentando com outro modelo...',
           error,
         );
+        throw new Error(
+          'Erro ao gerar conteúdo com todos os modelos disponíveis.',
+        );
       }
     }
   }
