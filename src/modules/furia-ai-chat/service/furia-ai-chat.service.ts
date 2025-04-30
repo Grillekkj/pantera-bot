@@ -35,4 +35,23 @@ export class FuriaAiChatService {
 
     return entity;
   }
+
+  public async getNicksAndNamesFormatted(): Promise<string> {
+    this.LOGGER.log(`Buscando jogadores/técnicos...`);
+
+    const entities = await this.furiaAiChatRepository.find({
+      select: ['nickname', 'name'],
+    });
+
+    if (!entities || entities.length === 0) {
+      this.LOGGER.warn(`Nenhum dado encontrado`);
+      throw new NotFoundException('Nenhum jogador/técnico encontrado');
+    }
+
+    const formattedList = entities
+      .map((e) => `${e.nickname} ${e.name}`)
+      .join('\n');
+
+    return formattedList;
+  }
 }
