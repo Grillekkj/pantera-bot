@@ -2,7 +2,7 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FuriaAiChatEntity } from '../entity/furia-ai-chat.entity';
 import { Repository } from 'typeorm';
-import { IFuriaAiChat, IGetByNicknameOrName } from './furia-ai-chat.struct';
+import { IGetByNicknameOrName } from './furia-ai-chat.struct';
 
 @Injectable()
 export class FuriaAiChatService {
@@ -13,9 +13,9 @@ export class FuriaAiChatService {
     private readonly furiaAiChatRepository: Repository<FuriaAiChatEntity>,
   ) {}
 
-  public async getByNicknameOrName(
+  public async getByNicknameOrNameFormatted(
     data: IGetByNicknameOrName,
-  ): Promise<IFuriaAiChat> {
+  ): Promise<string> {
     const searchTerm = data.nickname ?? data.name;
 
     this.LOGGER.log(
@@ -33,7 +33,11 @@ export class FuriaAiChatService {
       );
     }
 
-    return entity;
+    const { nickname, name, game, position, nationality, description } = entity;
+    const formatted =
+      `Apelido: ${nickname}, Nome real: ${name}, Jogo: ${game}, Posição: ${position}, Nacionalidade: ${nationality}, Descrição: ${description}`.trim();
+
+    return formatted;
   }
 
   public async getNicksAndNamesFormatted(): Promise<string> {
