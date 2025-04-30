@@ -1,3 +1,6 @@
+/.wwebjs_auth
+/.wwebjs_cache
+
 # compiled output
 /dist
 /node_modules

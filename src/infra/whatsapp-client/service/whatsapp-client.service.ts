@@ -63,12 +63,14 @@ export class WhatsappClientService implements OnModuleInit {
     return await this.usersRepository.save(newUser);
   }
 
-  public async getUser(data: IGetUser): Promise<IWhatsappClientUser | null> {
+  public async getUserById(
+    data: IGetUser,
+  ): Promise<IWhatsappClientUser | null> {
     const user = await this.usersRepository.findOne({
       where: { id: data.id },
     });
 
-    if (!user) throw new NotFoundException('Usuário não encontrado.');
+    if (!user) return null;
 
     return user;
   }

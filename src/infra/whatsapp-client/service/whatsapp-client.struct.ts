@@ -9,13 +9,12 @@ export interface IWhatsappClientUser {
 export interface IRegisterUser {
   id: string;
   menu: WhatsappClientUsersMenu;
-  step: number | undefined;
 }
 
 export interface IUpdateUser {
   id: string;
   menu?: WhatsappClientUsersMenu;
-  step?: number | undefined;
+  step?: number;
 }
 
 export interface IDeleteUser {
