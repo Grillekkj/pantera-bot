@@ -58,55 +58,83 @@ export class AppService implements OnModuleInit {
               id: from,
               menu: WhatsappClientUsersMenu.LATEST_NEWS,
             });
-            this.WHATSAPP_CLIENT.sendMessage(from, 'Você escolheu a opção 1!');
+
+            await this.WHATSAPP_CLIENT.sendMessage(
+              from,
+              'Você escolheu a opção 1!',
+            );
             break;
           case 2:
             await this.whatsappClientService.updateUser({
               id: from,
               menu: WhatsappClientUsersMenu.MATCH_SCHEDULE,
             });
-            this.WHATSAPP_CLIENT.sendMessage(from, 'Você escolheu a opção 2!');
+
+            await this.WHATSAPP_CLIENT.sendMessage(
+              from,
+              'Você escolheu a opção 2!',
+            );
             break;
           case 3:
             await this.whatsappClientService.updateUser({
               id: from,
               menu: WhatsappClientUsersMenu.TROPHY_HISTORY,
             });
-            this.WHATSAPP_CLIENT.sendMessage(from, 'Você escolheu a opção 3!');
+
+            await this.WHATSAPP_CLIENT.sendMessage(
+              from,
+              'Você escolheu a opção 3!',
+            );
             break;
           case 4:
             await this.whatsappClientService.updateUser({
               id: from,
               menu: WhatsappClientUsersMenu.MATCH_ALERTS,
             });
-            this.WHATSAPP_CLIENT.sendMessage(from, 'Você escolheu a opção 4!');
+
+            await this.WHATSAPP_CLIENT.sendMessage(
+              from,
+              'Você escolheu a opção 4!',
+            );
             break;
           case 5:
             await this.whatsappClientService.updateUser({
               id: from,
               menu: WhatsappClientUsersMenu.LIVE_GAME_STATUS,
             });
-            this.WHATSAPP_CLIENT.sendMessage(from, 'Você escolheu a opção 5!');
+
+            await this.WHATSAPP_CLIENT.sendMessage(
+              from,
+              'Você escolheu a opção 5!',
+            );
             break;
           case 6:
             await this.whatsappClientService.updateUser({
               id: from,
               menu: WhatsappClientUsersMenu.FURIA_AI_CHAT,
             });
-            this.WHATSAPP_CLIENT.sendMessage(from, 'Você escolheu a opção 6!');
+
+            await this.WHATSAPP_CLIENT.sendMessage(
+              from,
+              'Você escolheu a opção 6!',
+            );
             break;
           case 7:
             await this.whatsappClientService.updateUser({
               id: from,
               menu: WhatsappClientUsersMenu.OFFICIAL_STORE,
             });
-            this.WHATSAPP_CLIENT.sendMessage(from, 'Você escolheu a opção 7!');
+
+            await this.WHATSAPP_CLIENT.sendMessage(
+              from,
+              'Você escolheu a opção 7!',
+            );
             break;
         }
         return;
       }
 
-      this.WHATSAPP_CLIENT.sendMessage(from, String(response));
+      await this.WHATSAPP_CLIENT.sendMessage(from, String(response));
     });
   }
 }
