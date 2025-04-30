@@ -13,6 +13,7 @@ export const GEMINI_CLIENT_OPTIONS = {
  5 - Live Status dos Jogos (Em breve)
  6 - Conversa com Jogadores (IA)
  7 - Loja Oficial
+ 8 - Menu
 
 Regras:
 - Analise a mensagem do usuário.
