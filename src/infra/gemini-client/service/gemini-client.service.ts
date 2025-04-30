@@ -10,7 +10,11 @@ export class GeminiClientService {
     apiKey: environment.gemini.API_KEY,
   });
 
-  private async fetchResponse(model: string, config: any, contents: any[]) {
+  private async fetchResponse(
+    model: string,
+    config: any,
+    contents: any[],
+  ): Promise<string> {
     const response = await this.ai.models.generateContent({
       model,
       config,
@@ -22,10 +26,13 @@ export class GeminiClientService {
       response.candidates?.[0]?.content?.parts?.[0]?.text,
     );
 
-    return response.candidates?.[0]?.content?.parts?.[0]?.text;
+    return String(response.candidates?.[0]?.content?.parts?.[0]?.text);
   }
 
-  public async generateContent(inputText: string, systemInstruction?: string) {
+  public async generateContent(
+    inputText: string,
+    systemInstruction?: string,
+  ): Promise<string> {
     const config = {
       ...GEMINI_CLIENT_OPTIONS,
     };
