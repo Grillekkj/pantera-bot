@@ -11,4 +11,7 @@ export class UsersEntity {
 
   @Column({ nullable: true })
   step: number;
+
+  @Column({ nullable: true })
+  playerChosen: string;
 }
