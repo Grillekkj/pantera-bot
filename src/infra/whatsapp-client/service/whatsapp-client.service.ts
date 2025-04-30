@@ -92,7 +92,7 @@ export class WhatsappClientService implements OnModuleInit {
 
     if (!user) throw new NotFoundException('Usuário não encontrado.');
 
-    await this.usersRepository.delete({ id: data.id });
+    await this.usersRepository.remove(user);
   }
 
   public getClient(): Client {

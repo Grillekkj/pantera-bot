@@ -3,7 +3,8 @@ import { WhatsappClientUsersMenu } from '../entity/whatsapp-client-users-menu.en
 export interface IWhatsappClientUser {
   id: string;
   menu: WhatsappClientUsersMenu;
-  step: number | undefined;
+  step: number | null;
+  playerChosen: string | null;
 }
 
 export interface IRegisterUser {
@@ -14,7 +15,8 @@ export interface IRegisterUser {
 export interface IUpdateUser {
   id: string;
   menu?: WhatsappClientUsersMenu;
-  step?: number;
+  step?: number | null;
+  playerChosen?: string | null;
 }
 
 export interface IDeleteUser {
