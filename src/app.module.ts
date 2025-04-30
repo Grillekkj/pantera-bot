@@ -6,6 +6,7 @@ import { environment } from './configs/environment';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { WhatsappClientModule } from './infra/whatsapp-client/whatsapp-client.module';
 import { GeminiClientModule } from './infra/gemini-client/gemini-client.module';
+import { FuriaAiChatModule } from './modules/furia-ai-chat/furia-ai-chat.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { GeminiClientModule } from './infra/gemini-client/gemini-client.module';
     ConfigModule.forRoot({ isGlobal: true, load: [typeorm] }),
     WhatsappClientModule,
     GeminiClientModule,
+    FuriaAiChatModule,
   ],
   providers: [AppService],
 })
