@@ -136,7 +136,7 @@ export class AppService implements OnModuleInit {
             await this.updateUserMenuAndReply(
               from,
               WhatsappClientUsersMenu.LIVE_GAME_STATUS,
-              'Você escolheu a opção 4!',
+              'Você escolheu a opção 4! Infelizmente essa opção ainda não está disponível!',
             );
             break;
           case 5:
