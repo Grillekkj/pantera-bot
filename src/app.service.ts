@@ -7,6 +7,7 @@ import { menu } from './utils/menu';
 import { FuriaAiChatService } from './modules/furia-ai-chat/service/furia-ai-chat.service';
 import { SubmenuHandler } from './common/message-handler/submenu-handler.interface';
 import { LatestNewsService } from './modules/latest-news/service/latest-news.service';
+import { GamesHistoryService } from './modules/games-history/service/games-history.service';
 
 @Injectable()
 export class AppService implements OnModuleInit {
@@ -21,6 +22,7 @@ export class AppService implements OnModuleInit {
     private readonly geminiClientService: GeminiClientService,
     private readonly furiaAiChatService: FuriaAiChatService,
     private readonly latestNewsService: LatestNewsService,
+    private readonly gamesHistoryService: GamesHistoryService,
   ) {
     this.WHATSAPP_CLIENT = this.whatsappClientService.getClient();
     this.registerSubmenuHandlers();
@@ -35,6 +37,11 @@ export class AppService implements OnModuleInit {
     this.submenuHandlers.set(
       WhatsappClientUsersMenu.LATEST_NEWS,
       this.latestNewsService,
+    );
+
+    this.submenuHandlers.set(
+      WhatsappClientUsersMenu.GAMES_HISTORY,
+      this.gamesHistoryService,
     );
   }
 
@@ -103,50 +110,47 @@ export class AppService implements OnModuleInit {
           case 2:
             await this.updateUserMenuAndReply(
               from,
-              WhatsappClientUsersMenu.MATCH_SCHEDULE,
-              'Você escolheu a opção 2!',
+              WhatsappClientUsersMenu.GAMES_HISTORY,
+              'Você escolheu a opção 2! Aguarde enquanto busco as últimas estatísticas!',
             );
+
+            await this.submenuHandlers
+              .get(WhatsappClientUsersMenu.GAMES_HISTORY)
+              ?.handleMessage(message);
             break;
           case 3:
             await this.updateUserMenuAndReply(
               from,
-              WhatsappClientUsersMenu.TROPHY_HISTORY,
+              WhatsappClientUsersMenu.MATCH_ALERTS_SCHEDULE,
               'Você escolheu a opção 3!',
             );
             break;
           case 4:
             await this.updateUserMenuAndReply(
               from,
-              WhatsappClientUsersMenu.MATCH_ALERTS,
+              WhatsappClientUsersMenu.LIVE_GAME_STATUS,
               'Você escolheu a opção 4!',
             );
             break;
           case 5:
             await this.updateUserMenuAndReply(
               from,
-              WhatsappClientUsersMenu.LIVE_GAME_STATUS,
-              'Você escolheu a opção 5!',
-            );
-            break;
-          case 6:
-            await this.updateUserMenuAndReply(
-              from,
               WhatsappClientUsersMenu.FURIA_AI_CHAT,
-              'Você escolheu a opção 6! Se prepare para uma experiencia incrível!',
+              'Você escolheu a opção 5! Se prepare para uma experiencia incrível!',
             );
 
             await this.submenuHandlers
               .get(WhatsappClientUsersMenu.FURIA_AI_CHAT)
               ?.handleMessage(message);
             break;
-          case 7:
+          case 6:
             await this.updateUserMenuAndReply(
               from,
               WhatsappClientUsersMenu.OFFICIAL_STORE,
-              'Você escolheu a opção 7!',
+              'Você escolheu a opção 6!',
             );
             break;
-          case 8:
+          case 7:
             await this.WHATSAPP_CLIENT.sendMessage(from, menu);
             break;
         }
