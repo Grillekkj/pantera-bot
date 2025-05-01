@@ -8,6 +8,7 @@ import { WhatsappClientModule } from './infra/whatsapp-client/whatsapp-client.mo
 import { GeminiClientModule } from './infra/gemini-client/gemini-client.module';
 import { FuriaAiChatModule } from './modules/furia-ai-chat/furia-ai-chat.module';
 import { Draft5ScrapperModule } from './modules/draft5-scrapper/draft5-scrapper.module';
+import { LatestNewsModule } from './modules/latest-news/latest-news.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { Draft5ScrapperModule } from './modules/draft5-scrapper/draft5-scrapper.
     GeminiClientModule,
     FuriaAiChatModule,
     Draft5ScrapperModule,
+    LatestNewsModule,
   ],
   providers: [AppService],
 })
