@@ -6,6 +6,7 @@ import { WhatsappClientUsersMenu } from './infra/whatsapp-client/entity/whatsapp
 import { menu } from './utils/menu';
 import { FuriaAiChatService } from './modules/furia-ai-chat/service/furia-ai-chat.service';
 import { SubmenuHandler } from './common/message-handler/submenu-handler.interface';
+import { LatestNewsService } from './modules/latest-news/service/latest-news.service';
 
 @Injectable()
 export class AppService implements OnModuleInit {
@@ -19,6 +20,7 @@ export class AppService implements OnModuleInit {
     private readonly whatsappClientService: WhatsappClientService,
     private readonly geminiClientService: GeminiClientService,
     private readonly furiaAiChatService: FuriaAiChatService,
+    private readonly latestNewsService: LatestNewsService,
   ) {
     this.WHATSAPP_CLIENT = this.whatsappClientService.getClient();
     this.registerSubmenuHandlers();
@@ -28,6 +30,11 @@ export class AppService implements OnModuleInit {
     this.submenuHandlers.set(
       WhatsappClientUsersMenu.FURIA_AI_CHAT,
       this.furiaAiChatService,
+    );
+
+    this.submenuHandlers.set(
+      WhatsappClientUsersMenu.LATEST_NEWS,
+      this.latestNewsService,
     );
   }
 
@@ -86,8 +93,12 @@ export class AppService implements OnModuleInit {
             await this.updateUserMenuAndReply(
               from,
               WhatsappClientUsersMenu.LATEST_NEWS,
-              'Você escolheu a opção 1!',
+              'Você escolheu a opção 1! Aguarde enquanto busco as últimas notícias!',
             );
+
+            await this.submenuHandlers
+              .get(WhatsappClientUsersMenu.LATEST_NEWS)
+              ?.handleMessage(message);
             break;
           case 2:
             await this.updateUserMenuAndReply(
@@ -121,7 +132,7 @@ export class AppService implements OnModuleInit {
             await this.updateUserMenuAndReply(
               from,
               WhatsappClientUsersMenu.FURIA_AI_CHAT,
-              'Você escolheu a opção 6!',
+              'Você escolheu a opção 6! Se prepare para uma experiencia incrível!',
             );
 
             await this.submenuHandlers
