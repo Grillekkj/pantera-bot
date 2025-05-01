@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { SubmenuHandler } from 'src/common/message-handler/submenu-handler.interface';
 import { WhatsappClientService } from 'src/infra/whatsapp-client/service/whatsapp-client.service';
 import { Draft5ScrapperService } from 'src/modules/draft5-scrapper/service/draft5-scrapper.service';
@@ -6,7 +6,6 @@ import { Client } from 'whatsapp-web.js';
 
 @Injectable()
 export class LatestNewsService implements SubmenuHandler {
-  private readonly LOGGER = new Logger(LatestNewsService.name);
   private readonly WHATSAPP_CLIENT: Client;
 
   constructor(
