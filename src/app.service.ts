@@ -8,6 +8,7 @@ import { FuriaAiChatService } from './modules/furia-ai-chat/service/furia-ai-cha
 import { SubmenuHandler } from './common/message-handler/submenu-handler.interface';
 import { LatestNewsService } from './modules/latest-news/service/latest-news.service';
 import { GamesHistoryService } from './modules/games-history/service/games-history.service';
+import { OfficialStoreService } from './modules/official-store/service/official-store.service';
 
 @Injectable()
 export class AppService implements OnModuleInit {
@@ -23,6 +24,7 @@ export class AppService implements OnModuleInit {
     private readonly furiaAiChatService: FuriaAiChatService,
     private readonly latestNewsService: LatestNewsService,
     private readonly gamesHistoryService: GamesHistoryService,
+    private readonly officialStoreService: OfficialStoreService,
   ) {
     this.WHATSAPP_CLIENT = this.whatsappClientService.getClient();
     this.registerSubmenuHandlers();
@@ -42,6 +44,11 @@ export class AppService implements OnModuleInit {
     this.submenuHandlers.set(
       WhatsappClientUsersMenu.GAMES_HISTORY,
       this.gamesHistoryService,
+    );
+
+    this.submenuHandlers.set(
+      WhatsappClientUsersMenu.OFFICIAL_STORE,
+      this.officialStoreService,
     );
   }
 
@@ -149,6 +156,10 @@ export class AppService implements OnModuleInit {
               WhatsappClientUsersMenu.OFFICIAL_STORE,
               'Você escolheu a opção 6!',
             );
+
+            await this.submenuHandlers
+              .get(WhatsappClientUsersMenu.OFFICIAL_STORE)
+              ?.handleMessage(message);
             break;
           case 7:
             await this.WHATSAPP_CLIENT.sendMessage(from, menu);
