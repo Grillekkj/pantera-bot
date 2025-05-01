@@ -69,7 +69,7 @@ export class GeminiClientService {
         'Erro gerando conteúdo, tentando com outro modelo...',
         error,
       );
-      // Retry with a different model if the first attempt fails
+
       try {
         const response = await this.fetchResponse(
           environment.gemini.MODEL_NAME2,

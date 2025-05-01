@@ -103,50 +103,43 @@ export class AppService implements OnModuleInit {
           case 2:
             await this.updateUserMenuAndReply(
               from,
-              WhatsappClientUsersMenu.MATCH_SCHEDULE,
+              WhatsappClientUsersMenu.GAMES_HISTORY,
               'Você escolheu a opção 2!',
             );
             break;
           case 3:
             await this.updateUserMenuAndReply(
               from,
-              WhatsappClientUsersMenu.TROPHY_HISTORY,
+              WhatsappClientUsersMenu.MATCH_ALERTS_SCHEDULE,
               'Você escolheu a opção 3!',
             );
             break;
           case 4:
             await this.updateUserMenuAndReply(
               from,
-              WhatsappClientUsersMenu.MATCH_ALERTS,
+              WhatsappClientUsersMenu.LIVE_GAME_STATUS,
               'Você escolheu a opção 4!',
             );
             break;
           case 5:
             await this.updateUserMenuAndReply(
               from,
-              WhatsappClientUsersMenu.LIVE_GAME_STATUS,
-              'Você escolheu a opção 5!',
-            );
-            break;
-          case 6:
-            await this.updateUserMenuAndReply(
-              from,
               WhatsappClientUsersMenu.FURIA_AI_CHAT,
-              'Você escolheu a opção 6! Se prepare para uma experiencia incrível!',
+              'Você escolheu a opção 5! Se prepare para uma experiencia incrível!',
             );
 
             await this.submenuHandlers
               .get(WhatsappClientUsersMenu.FURIA_AI_CHAT)
               ?.handleMessage(message);
             break;
-          case 7:
+          case 6:
             await this.updateUserMenuAndReply(
               from,
               WhatsappClientUsersMenu.OFFICIAL_STORE,
-              'Você escolheu a opção 7!',
+              'Você escolheu a opção 6!',
             );
             break;
-          case 8:
+          case 7:
             await this.WHATSAPP_CLIENT.sendMessage(from, menu);
             break;
         }
