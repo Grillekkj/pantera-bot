@@ -23,7 +23,7 @@ export class Draft5ScrapperService implements OnModuleDestroy {
     }
   }
 
-  async getLatestNews(): Promise<string> {
+  public async getLatestNews(): Promise<string> {
     await this.initBrowser();
     const page = await this.browser.newPage();
 
@@ -78,7 +78,7 @@ export class Draft5ScrapperService implements OnModuleDestroy {
     }
   }
 
-  async getLastResults(): Promise<string> {
+  public async getLastResults(): Promise<string> {
     await this.initBrowser();
     const page = await this.browser.newPage();
 
