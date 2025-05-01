@@ -154,7 +154,7 @@ export class AppService implements OnModuleInit {
             await this.updateUserMenuAndReply(
               from,
               WhatsappClientUsersMenu.OFFICIAL_STORE,
-              'Você escolheu a opção 6!',
+              'Você escolheu a opção 6! Aproveite as promoções!',
             );
 
             await this.submenuHandlers
