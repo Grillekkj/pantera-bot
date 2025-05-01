@@ -73,8 +73,9 @@ export class Draft5ScrapperService implements OnModuleDestroy {
       return message.trim();
     } catch (error) {
       console.error('Erro ao coletar notícias:', error);
-      await page.close();
       return 'Não foi possível obter as últimas notícias no momento.';
+    } finally {
+      await page.close();
     }
   }
 
@@ -95,8 +96,9 @@ export class Draft5ScrapperService implements OnModuleDestroy {
       return this.formatResultsMessage(matchResults);
     } catch (error) {
       console.error('Erro ao coletar resultados:', error);
-      await page.close();
       return 'Não foi possível obter os últimos resultados no momento.';
+    } finally {
+      await page.close();
     }
   }
 
