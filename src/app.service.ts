@@ -129,7 +129,7 @@ export class AppService implements OnModuleInit {
             await this.updateUserMenuAndReply(
               from,
               WhatsappClientUsersMenu.MATCH_ALERTS_SCHEDULE,
-              'Você escolheu a opção 3!',
+              'Você escolheu a opção 3! Anote as datas e horários dos jogos ou ative os alertas!',
             );
             break;
           case 4:
