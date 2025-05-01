@@ -7,6 +7,7 @@ import { menu } from './utils/menu';
 import { FuriaAiChatService } from './modules/furia-ai-chat/service/furia-ai-chat.service';
 import { SubmenuHandler } from './common/message-handler/submenu-handler.interface';
 import { LatestNewsService } from './modules/latest-news/service/latest-news.service';
+import { GamesHistoryService } from './modules/games-history/service/games-history.service';
 
 @Injectable()
 export class AppService implements OnModuleInit {
@@ -21,6 +22,7 @@ export class AppService implements OnModuleInit {
     private readonly geminiClientService: GeminiClientService,
     private readonly furiaAiChatService: FuriaAiChatService,
     private readonly latestNewsService: LatestNewsService,
+    private readonly gamesHistoryService: GamesHistoryService,
   ) {
     this.WHATSAPP_CLIENT = this.whatsappClientService.getClient();
     this.registerSubmenuHandlers();
@@ -35,6 +37,11 @@ export class AppService implements OnModuleInit {
     this.submenuHandlers.set(
       WhatsappClientUsersMenu.LATEST_NEWS,
       this.latestNewsService,
+    );
+
+    this.submenuHandlers.set(
+      WhatsappClientUsersMenu.GAMES_HISTORY,
+      this.gamesHistoryService,
     );
   }
 
@@ -104,8 +111,12 @@ export class AppService implements OnModuleInit {
             await this.updateUserMenuAndReply(
               from,
               WhatsappClientUsersMenu.GAMES_HISTORY,
-              'Você escolheu a opção 2!',
+              'Você escolheu a opção 2! Aguarde enquanto busco as últimas estatísticas!',
             );
+
+            await this.submenuHandlers
+              .get(WhatsappClientUsersMenu.GAMES_HISTORY)
+              ?.handleMessage(message);
             break;
           case 3:
             await this.updateUserMenuAndReply(
