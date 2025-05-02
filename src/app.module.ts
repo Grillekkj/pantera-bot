@@ -4,6 +4,14 @@ import { ConfigModule } from '@nestjs/config';
 import typeorm from './configs/typeorm';
 import { environment } from './configs/environment';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { WhatsappClientModule } from './infra/whatsapp-client/whatsapp-client.module';
+import { GeminiClientModule } from './infra/gemini-client/gemini-client.module';
+import { FuriaAiChatModule } from './modules/furia-ai-chat/furia-ai-chat.module';
+import { Draft5ScrapperModule } from './modules/draft5-scrapper/draft5-scrapper.module';
+import { LatestNewsModule } from './modules/latest-news/latest-news.module';
+import { GamesHistoryModule } from './modules/games-history/games-history.module';
+import { OfficialStoreModule } from './modules/official-store/official-store.module';
+import { MatchAlertsScheduleModule } from './modules/match-alerts-schedule/match-alerts-schedule.module';
 
 @Module({
   imports: [
@@ -19,6 +27,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       logging: ['error', 'warn', 'schema', 'info', 'log'],
     }),
     ConfigModule.forRoot({ isGlobal: true, load: [typeorm] }),
+    WhatsappClientModule,
+    GeminiClientModule,
+    FuriaAiChatModule,
+    Draft5ScrapperModule,
+    LatestNewsModule,
+    GamesHistoryModule,
+    OfficialStoreModule,
+    MatchAlertsScheduleModule,
   ],
   providers: [AppService],
 })
