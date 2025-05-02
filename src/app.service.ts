@@ -9,6 +9,7 @@ import { SubmenuHandler } from './common/message-handler/submenu-handler.interfa
 import { LatestNewsService } from './modules/latest-news/service/latest-news.service';
 import { GamesHistoryService } from './modules/games-history/service/games-history.service';
 import { OfficialStoreService } from './modules/official-store/service/official-store.service';
+import { MatchAlertsScheduleService } from './modules/match-alerts-schedule/service/match-alerts-schedule.service';
 
 @Injectable()
 export class AppService implements OnModuleInit {
@@ -25,6 +26,7 @@ export class AppService implements OnModuleInit {
     private readonly latestNewsService: LatestNewsService,
     private readonly gamesHistoryService: GamesHistoryService,
     private readonly officialStoreService: OfficialStoreService,
+    private readonly matchAlertsScheduleService: MatchAlertsScheduleService,
   ) {
     this.WHATSAPP_CLIENT = this.whatsappClientService.getClient();
     this.registerSubmenuHandlers();
@@ -49,6 +51,11 @@ export class AppService implements OnModuleInit {
     this.submenuHandlers.set(
       WhatsappClientUsersMenu.OFFICIAL_STORE,
       this.officialStoreService,
+    );
+
+    this.submenuHandlers.set(
+      WhatsappClientUsersMenu.MATCH_ALERTS_SCHEDULE,
+      this.matchAlertsScheduleService,
     );
   }
 
@@ -129,14 +136,18 @@ export class AppService implements OnModuleInit {
             await this.updateUserMenuAndReply(
               from,
               WhatsappClientUsersMenu.MATCH_ALERTS_SCHEDULE,
-              'Você escolheu a opção 3!',
+              'Você escolheu a opção 3! Anote as datas e horários dos jogos ou ative os alertas!',
             );
+
+            await this.submenuHandlers
+              .get(WhatsappClientUsersMenu.MATCH_ALERTS_SCHEDULE)
+              ?.handleMessage(message);
             break;
           case 4:
             await this.updateUserMenuAndReply(
               from,
               WhatsappClientUsersMenu.LIVE_GAME_STATUS,
-              'Você escolheu a opção 4!',
+              'Você escolheu a opção 4! Infelizmente essa opção ainda não está disponível!',
             );
             break;
           case 5:
@@ -154,7 +165,7 @@ export class AppService implements OnModuleInit {
             await this.updateUserMenuAndReply(
               from,
               WhatsappClientUsersMenu.OFFICIAL_STORE,
-              'Você escolheu a opção 6!',
+              'Você escolheu a opção 6! Aproveite as promoções!',
             );
 
             await this.submenuHandlers

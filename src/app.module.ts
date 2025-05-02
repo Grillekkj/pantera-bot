@@ -11,6 +11,7 @@ import { Draft5ScrapperModule } from './modules/draft5-scrapper/draft5-scrapper.
 import { LatestNewsModule } from './modules/latest-news/latest-news.module';
 import { GamesHistoryModule } from './modules/games-history/games-history.module';
 import { OfficialStoreModule } from './modules/official-store/official-store.module';
+import { MatchAlertsScheduleModule } from './modules/match-alerts-schedule/match-alerts-schedule.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { OfficialStoreModule } from './modules/official-store/official-store.mod
     LatestNewsModule,
     GamesHistoryModule,
     OfficialStoreModule,
+    MatchAlertsScheduleModule,
   ],
   providers: [AppService],
 })
