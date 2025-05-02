@@ -43,8 +43,12 @@ export class MatchAlertsScheduleService
         const cronTime = `${gameDate.getSeconds()} ${gameDate.getMinutes()} ${gameDate.getHours()} ${gameDate.getDate()} ${gameDate.getMonth() + 1} *`;
 
         cron.schedule(cronTime, async () => {
-          await this.WHATSAPP_CLIENT.sendMessage(alert.id, match.message);
-          await this.removeAlertFromUser(alert.id, gameDate.getTime());
+          try {
+            await this.WHATSAPP_CLIENT.sendMessage(alert.id, match.message);
+            await this.removeAlertFromUser(alert.id, gameDate.getTime());
+          } catch (error) {
+            console.error(`Erro ao enviar alerta para: ${alert.id}:`, error);
+          }
         });
       });
     });
@@ -128,8 +132,12 @@ export class MatchAlertsScheduleService
       const cronTime = `${gameDate.getSeconds()} ${gameDate.getMinutes()} ${gameDate.getHours()} ${gameDate.getDate()} ${gameDate.getMonth() + 1} *`;
 
       cron.schedule(cronTime, async () => {
-        await this.WHATSAPP_CLIENT.sendMessage(message.from, alertMessage);
-        await this.removeAlertFromUser(message.from, gameDate.getTime());
+        try {
+          await this.WHATSAPP_CLIENT.sendMessage(message.from, alertMessage);
+          await this.removeAlertFromUser(message.from, gameDate.getTime());
+        } catch (error) {
+          console.error(`Erro ao enviar alerta para: ${message.from}:`, error);
+        }
       });
     }
 
