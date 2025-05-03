@@ -12,6 +12,11 @@ import { LatestNewsModule } from './modules/latest-news/latest-news.module';
 import { GamesHistoryModule } from './modules/games-history/games-history.module';
 import { OfficialStoreModule } from './modules/official-store/official-store.module';
 import { MatchAlertsScheduleModule } from './modules/match-alerts-schedule/match-alerts-schedule.module';
+import { TWURPLE_AUTH_PROVIDER, TwurpleAuthModule } from '@nestjs-twurple/auth';
+import { TwurpleChatModule } from '@nestjs-twurple/chat';
+import { RefreshingAuthProvider } from '@twurple/auth';
+import { TwitchClientModule } from './infra/twitch-client/twitch-client.module';
+import { TwitchAiChatModule } from './modules/twitch-ai-chat/twitch-ai-chat.module';
 
 @Module({
   imports: [
@@ -27,6 +32,38 @@ import { MatchAlertsScheduleModule } from './modules/match-alerts-schedule/match
       logging: ['error', 'warn', 'schema', 'info', 'log'],
     }),
     ConfigModule.forRoot({ isGlobal: true, load: [typeorm] }),
+    TwurpleAuthModule.registerAsync({
+      isGlobal: true,
+      useFactory: () => {
+        return {
+          type: 'refreshing',
+          clientId: String(environment.twitch.CLIENT_ID),
+          clientSecret: String(environment.twitch.CLIENT_SECRET),
+        };
+      },
+    }),
+    TwurpleChatModule.registerAsync({
+      isGlobal: true,
+      inject: [TWURPLE_AUTH_PROVIDER],
+      useFactory: (authProvider: RefreshingAuthProvider) => {
+        const tokenBot = {
+          accessToken: String(environment.twitch.ACCESS_TOKEN),
+          refreshToken: String(environment.twitch.REFRESH_TOKEN),
+          expiresIn: 3600,
+          obtainmentTimestamp: Date.now(),
+          scope: ['chat:read', 'chat:edit'],
+        };
+        authProvider.addUser(String(environment.twitch.USER_ID), tokenBot, [
+          'chat',
+        ]);
+        return {
+          authProvider,
+          isAlwaysMod: true,
+          requestMembershipEvents: true,
+        };
+      },
+    }),
+    TwitchClientModule,
     WhatsappClientModule,
     GeminiClientModule,
     FuriaAiChatModule,
@@ -35,6 +72,7 @@ import { MatchAlertsScheduleModule } from './modules/match-alerts-schedule/match
     GamesHistoryModule,
     OfficialStoreModule,
     MatchAlertsScheduleModule,
+    TwitchAiChatModule,
   ],
   providers: [AppService],
 })
