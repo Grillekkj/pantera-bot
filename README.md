@@ -4,6 +4,17 @@ Este é o repositório do **PanteraBot**, um bot desenvolvido especialmente para
 
 Repositório oficial: [https://github.com/Grillekkj/pantera-bot](https://github.com/Grillekkj/pantera-bot)
 
+## Vídeo de Apresentação
+
+Assista ao vídeo de apresentação para entender como funciona e todas as funcionalidades que oferecemos. O vídeo fornece uma visão geral do bot e como ele pode ser usado no WhatsApp ou na Twitch.
+
+// Placeholder para player do youtube aqui
+
+## Perfil do Bot
+Clique nas imagens para acessar o bot diretamente no WhatsApp ou no canal da Twitch respectivamente.
+
+[<img src="https://github.com/user-attachments/assets/8b3293e3-d8e2-48f2-a871-06e23a666e54" width="200">](https://wa.me/+5521986851646) [<img src="https://github.com/user-attachments/assets/39251156-7765-42c8-bbe4-592a2d725e77" width="200">](https://www.twitch.tv/furiapanterabot)
+
 ## 🚀 Tecnologias Utilizadas
 
 * [NestJS](https://nestjs.com/) — Framework progressivo para construção de aplicações Node.js escaláveis
@@ -125,6 +136,19 @@ pantera-bot/
 ├── tsconfig.build.json               # Configuração de build do TypeScript
 ├── tsconfig.json                     # Configuração geral do TypeScript
 ```
+## 🤖 Uso de Inteligência Artificial no Desenvolvimento do Projeto
+
+A Inteligência Artificial foi utilizada para ajudar no desenvolvimento do projeto em várias áreas específicas. Aqui estão os pontos onde a IA foi aplicada para facilitar e acelerar o processo de criação do código e conteúdo:
+
+1. **Assistência na Criação do Código de Web Scraping**
+   - **Como a IA foi usada:** A IA ajudou a escrever e otimizar o código de web scraping, fornecendo sugestões de estruturas, bibliotecas e técnicas para coletar dados de forma eficiente e sem erros. Isso acelerou a implementação da funcionalidade de coleta de dados, como partidas e notícias, com menos esforço manual.
+
+2. **Criação de Textos Automatizados**
+   - **Como a IA foi usada:** A IA foi usada para gerar e aprimorar textos, como respostas automáticas para o WhatsApp e Twitch, e até mesmo conteúdos promocionais. Ela ajudou a estruturar e criar frases que soassem naturais e contextualmente relevantes, garantindo uma comunicação eficiente e fluida com os usuários.
+
+3. **Criação de Imagens de Perfil**
+   - **Como a IA foi usada:** A IA foi utilizada para gerar imagens de perfil e avatares personalizados para o bot. Com base em descrições ou temas fornecidos, a IA criou imagens visuais únicas, economizando tempo e esforço de design gráfico e garantindo um visual profissional e coeso para o projeto.
+
 ## 📌 Próximos Passos
 
 1. **Melhoria na Escuta de Mensagens e Gerenciamento de Menus**  
