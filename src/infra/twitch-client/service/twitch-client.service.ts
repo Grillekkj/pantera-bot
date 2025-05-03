@@ -1,10 +1,10 @@
-import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { InjectChatClient } from '@nestjs-twurple/chat';
 import { ChatClient, ChatMessage } from '@twurple/chat';
 import { environment } from 'src/configs/environment';
 
 @Injectable()
-export class TwitchClientService implements OnApplicationBootstrap {
+export class TwitchClientService implements OnModuleInit {
   private readonly LOGGER = new Logger(TwitchClientService.name);
 
   constructor(
@@ -16,7 +16,7 @@ export class TwitchClientService implements OnApplicationBootstrap {
     });
   }
 
-  async onApplicationBootstrap(): Promise<void> {
+  async onModuleInit(): Promise<void> {
     this.TWITCH_CLIENT.connect();
     this.LOGGER.log('Conectado ao Twitch Client com sucesso!');
   }
