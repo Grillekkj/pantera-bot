@@ -16,6 +16,7 @@ import { TWURPLE_AUTH_PROVIDER, TwurpleAuthModule } from '@nestjs-twurple/auth';
 import { TwurpleChatModule } from '@nestjs-twurple/chat';
 import { RefreshingAuthProvider } from '@twurple/auth';
 import { TwitchClientModule } from './infra/twitch-client/twitch-client.module';
+import { TwitchAiChatModule } from './modules/twitch-ai-chat/twitch-ai-chat.module';
 
 @Module({
   imports: [
@@ -71,6 +72,7 @@ import { TwitchClientModule } from './infra/twitch-client/twitch-client.module';
     GamesHistoryModule,
     OfficialStoreModule,
     MatchAlertsScheduleModule,
+    TwitchAiChatModule,
   ],
   providers: [AppService],
 })
