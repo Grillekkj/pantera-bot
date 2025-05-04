@@ -146,7 +146,7 @@ export class MatchAlertsScheduleService
       `✅ Alertas salvos com sucesso! Você receberá uma mensagem quando o jogo começar.`,
     );
 
-    await this.whatsappClientService.deleteUser(message.from);
+    await this.whatsappClientService.deleteUser({ id: message.from });
   }
 
   private async generateGameAlertMessage(
