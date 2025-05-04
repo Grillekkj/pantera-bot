@@ -148,6 +148,9 @@ A Inteligência Artificial foi utilizada para ajudar no desenvolvimento do proje
 
 3. **Criação de Imagens de Perfil**
    - **Como a IA foi usada:** A IA foi utilizada para gerar imagens de perfil e avatares personalizados para o bot. Com base em descrições ou temas fornecidos, a IA criou imagens visuais únicas, economizando tempo e esforço de design gráfico e garantindo um visual profissional e coeso para o projeto.
+  
+4. **Revisão de Código com GitHub Copilot**
+   - **Como a IA foi usada:** O GitHub Copilot foi utilizado como uma ferramenta de revisão de código, sugerindo melhorias, identificando possíveis erros e oferecendo alternativas mais eficientes para trechos do código. Isso contribuiu para a qualidade geral do projeto, facilitando boas práticas de programação e manutenção.
 
 ## 📌 Próximos Passos
 
