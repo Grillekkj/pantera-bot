@@ -98,6 +98,15 @@ export class FuriaAiChatService implements SubmenuHandler {
       nickname: user.playerChosen,
     });
 
+    if (!playerInfo) {
+      await this.WHATSAPP_CLIENT.sendMessage(
+        message.from,
+        `Desculpe, acontenceu um erro, tente novamente.`,
+      );
+      await this.whatsappClientService.deleteUser(message.from);
+      return;
+    }
+
     let chatContext = this.chatHistories.get(message.from);
     if (!chatContext) {
       chatContext = [];
@@ -131,7 +140,7 @@ export class FuriaAiChatService implements SubmenuHandler {
     await this.WHATSAPP_CLIENT.sendMessage(message.from, response.trim());
   }
 
-  private async getByNickname(data: IGetByNickname): Promise<string> {
+  private async getByNickname(data: IGetByNickname): Promise<string | null> {
     this.LOGGER.log(
       `Buscando jogador/técnico por nickname: ${data.nickname}...`,
     );
@@ -142,9 +151,7 @@ export class FuriaAiChatService implements SubmenuHandler {
 
     if (!entity) {
       this.LOGGER.warn(`Nenhum dado encontrado para ${data.nickname}`);
-      throw new NotFoundException(
-        'Nenhum jogador/técnico com esse nick encontrado',
-      );
+      return null;
     }
 
     const { nickname, name, game, position, nationality, description } = entity;
