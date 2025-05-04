@@ -190,6 +190,9 @@ A Inteligência Artificial foi utilizada para ajudar no desenvolvimento do proje
 13. **Integração de Contexto com Dados de Jogadores, Técnicos e Partidas no Bot da Twitch**  
      - **Como faria:** Integraria os dados de jogadores, técnicos, histórico de partidas e status de partidas ao bot da Twitch, utilizando informações disponíveis via API ou banco de dados. O bot poderia acessar esses dados para fornecer respostas automáticas sobre o andamento das partidas, quem está jogando, quais técnicos estão envolvidos, e o histórico de confrontos. Assim, o bot funcionaria como um FAQ dinâmico e atualizado durante a live, respondendo automaticamente a perguntas como "Quem está jogando hoje?", "Qual o placar da última partida?" ou "Qual o status da partida atual?". Isso aumentaria a interação e o engajamento na transmissão, tornando o bot uma ferramenta útil e informativa durante a live.
 
+14. **Know Your Fan no Chatbot do WhatsApp**
+    - Como faria: Adicionaria o recurso "Know Your Fan" no chatbot do WhatsApp, onde o bot pediria informações dos fãs, incluindo o CPF, e salvaria essas informações no banco de dados. Utilizaria a Gemini para validar documentos dos fãs, incluindo a verificação do CPF, garantindo que as informações enviadas fossem legítimas e verificadas corretamente. Isso permitiria uma interação mais personalizada com os fãs, além de manter um banco de dados confiável e atualizado para futuras ações e promoções.
+
 Esses passos tornariam o projeto mais robusto, escalável e pronto para produção real.
 
 ## 💻 Ambiente de Desenvolvimento
