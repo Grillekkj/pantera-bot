@@ -8,7 +8,7 @@ Repositório oficial: [https://github.com/Grillekkj/pantera-bot](https://github.
 
 Assista ao vídeo de apresentação para entender como funciona e todas as funcionalidades que oferecemos. O vídeo fornece uma visão geral do bot e como ele pode ser usado no WhatsApp ou na Twitch.
 
-// Placeholder para player do youtube aqui
+https://www.youtube.com/watch?v=-4lj4yQRWiY
 
 ## Perfil do Bot
 Clique nas imagens para acessar o bot diretamente no WhatsApp ou no canal da Twitch respectivamente.
